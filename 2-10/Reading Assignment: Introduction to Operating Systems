@@ -17,11 +17,17 @@
     The CPU having to ready every byte read or written consumes alot proccessing power, there fore it would limit the amount of tasks that can be run concurrently, making it hard to impliment multiprograming.
 
 6. There are several design goals in building an operating system, for example, resource utilization, timeliness, robustness, and so on. Give an example of two design goals that may contradict one another.
+    Resource utilization and security may cause. The os wants to efficiently utilize resources such as CPU time, memory and disk space. The os also wants make sure the system is protected from malicious attacks. 
+    Adding security measures like encryption and firewalls may require more system resources slowing the system, which conflicts with the resource utilization goal.
 
 7. Which of the following instructions should be allowed only in kernel mode? (a) Disable all interrupts. (b) Read the time-of-day clock. (c) Set the time-of-day clock. (d) Change the memory map.
+    The only instructions that should be allowed in kernel mode is (a) Disable all interrupts and (d) Change the memory map
 
 8. Consider a system that has two CPUs, each CPU having two threads (hyperthreading). Suppose three programs, P0, P1, and P2, are started with run times of 5, 10 and 20 msec, respectively. How long will it take to complete the execution of these programs? Assume that all three programs are 100% CPU bound, do not block during execution, and do not change CPUs once assigned.
-
+    This system has 2 CPUS and 2 threads, so there are 4 logical processors. If the programs run 100% on the CPU, each program runs on one of the threads, it will take 20 msec to complete the set.
+    
 9. What is a trap instruction? Explain its use in operating systems.
+    The TRAP instruction switches from user mode to kernel mode and starts the operating system. In OS, the trap instruction is used as a mechanism for providing services to user level programs. The OS uses the trap number to get the correcty handler then the handler returns control to the user level program once the task is completed.
 
 10. Modern operating systems decouple a process address space from the machine’s physical memory. List two advantages of this design.
+    Two advantages of modern os is improved memory management and better security.
