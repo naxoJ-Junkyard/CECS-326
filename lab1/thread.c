@@ -15,26 +15,31 @@ Because the sleeping thread is running independently of the main thread. While t
 #include <unistd.h>
 #include <pthread.h>
 
-
+//2nd thread function
 static void *child(void *ignored){
+  //infinite while loop that sleeps/outputs txt every 3 seconds
   while (1){
    sleep(3);
    printf("Child Slept 3 seconds.\n");
   }  
   return NULL;
 }
-
+//main thread
 int main(int argc, char *argv[]){
-   pthread_t child_thread;
+  //2nd thread name
+  pthread_t child_thread;
    int code;
+  //creates 2nd thread using the thread name and function
    code = pthread_create(&child_thread, NULL, child, NULL);
    if(code){
       fprintf(stderr, "pthread_create failed with code %d\n", code);
    }
+  //waits for enter to be pressed
    getchar();
    printf("Enter Pressed\n"); 
-  
+  //cancels 2nd thread after enter is pressed
    pthread_cancel(child_thread);
+  //waits for the child to exit
    pthread_join(child_thread,NULL);
 
   
