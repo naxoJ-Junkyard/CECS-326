@@ -1,5 +1,14 @@
 //Jaxon Brown
+/* 
+Explain what pthread is doing in this program. Be specific.
 
+In tis program pthread is creating a 2nd thread independent from the main called child_thread, the sleeper thread. The thread is created using pthread_create(). This sleeper thread runs an infinite loop until enter is pressed, which cancels the thread using pthread_cancel(). The main thread then waits for the child thread to exit using the pthread_join() function, which blocks until the child thread has terminated. This ensures that the child thread has been properly terminated before the program exits.
+
+
+Explain why the sleeping thread can print its periodic messages while the main thread is waiting for keyboard input.
+
+Because the sleeping thread is running independently of the main thread. While the main thread is blocked waiting for user input, the sleeping thread is able to continue running and printing its messages.
+*/
 
 
 #include <stdio.h>
