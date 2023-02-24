@@ -1,21 +1,34 @@
-Assume that you are trying to download a large 2-GB file from the Internet. The file is available from a set of mirror servers, each of which can deliver a subset of the file’s bytes; assume that a given request specifies the starting and ending bytes of the file. Explain how you might use threads to improve the download time.
+1. Assume that you are trying to download a large 2-GB file from the Internet. The file is available from a set of mirror servers, each of which can deliver a subset of the file’s bytes; assume that a given request specifies the starting and ending bytes of the file. Explain how you might use threads to improve the download time.
+  You can use threads to improve the downlaod time by splitting the download into multiple smaller files and then having multiple threads download the multiple smaller files.
 
-What is the biggest advantage of implementing threads in user space? What is the biggest disadvantage?
+2. What is the biggest advantage of implementing threads in user space? What is the biggest disadvantage?
+  The biggest advantage of implementing threads in user space is that iy can provide faster context switching and more flexability.
+  The biggest disadvantage is that it doesnt have access to the system resources and is limited by its capabilities.
 
-Does Peterson’s solution to the mutual-exclusion problem shown in Fig. 2-24 of MOS4e work when process scheduling is preemptive? How about when it is nonpreemptive?
+3. Does Peterson’s solution to the mutual-exclusion problem shown in Fig. 2-24 of MOS4e work when process scheduling is preemptive? How about when it is nonpreemptive?
+  Peterson's solution to the mutual-exclusion problem works correctly when process scheduling is nonpreemptive. When process scheduling is preemptive, the solution needs to be modified to use atomic operations to ensure mutual exclusion.
+  
+4. The producer-consumer problem can be extended to a system with multiple producers and consumers that write (or read) to (from) one shared buffer. Assume that each producer and consumer runs in its own thread. Will the solution presented in Fig. 2-28 of MOS4e, using semaphores, work for this system?
+  If each producer and consumer runs in its own thread, then the solution presented in Fig. 2-28 using semaphores can still be used to handle multiple producers and consumers.
+  
+5. How could an operating system that can disable interrupts implement semaphores?
+  By disabling interrupts during semaphore operations, the operating system ensures that only one process can access the shared resource at a time, and that the semaphore's queue is not modified by another process while a semaphore operation is being performed.
 
-The producer-consumer problem can be extended to a system with multiple producers and consumers that write (or read) to (from) one shared buffer. Assume that each producer and consumer runs in its own thread. Will the solution presented in Fig. 2-28 of MOS4e, using semaphores, work for this system?
+6. A fast-food restaurant has four kinds of employees: (a) order takers, who take customers’ orders; (b) cooks, who prepare the food; (c) packaging specialists, who stuff the food into bags; and (d) cashiers, who give the bags to customers and take their money. Each employee can be regarded as a communicating sequential process. What form of interprocess communication do they use? Relate this model to processes in UNIX.
+  The employees in the fast-food restaurant use message passing as their form of interprocess communication. each employee communicates with the next employee in the process chain by sending a message to inform them of their completed task and the next task that needs to be performed.
+  This model of interprocess communication is similar to how processes in UNIX communicate with each other using pipes. Pipes allow the output of one process to be used as the input to another process, enabling communication between the two processes.
+  
+7. Five jobs are waiting to be run. Their expected run times are 9, 6, 3, 5, and x. In what order should they be run to minimize average response time? (Your answer will depend on x).
+ job1 (9sec) | job2 (6sec) | job3 (3sec) | job4 (5sec) | job5 (x sec)       run shortest run time first
+ 
+ SO the order of jobs:
+ if x>9,  run job 2, job 3, job 4, job 1, job 5
+ if x<9,  run job 5, job 2, job 3, job 4, job 1 
+ 
+8. The aging algorithm with a = 1/2 is being used to predict run times. The previous four runs, from oldest to most recent, are 40, 20, 40, and 15 msec. What is the prediction of the next time? Explain.
+  
 
-How could an operating system that can disable interrupts implement semaphores?
 
-A fast-food restaurant has four kinds of employees: (a) order takers, who take customers’ orders; (b) cooks, who prepare the food; (c) packaging specialists, who stuff the food into bags; and (d) cashiers, who give the bags to customers and take their money.
+9. In the dining philosophers problem, let the following protocol be used: An even-numbered philosopher always picks up his left fork before picking up his right fork; an odd-numbered philosopher always picks up his right fork before picking up his left fork. Will this protocol guarantee deadlock-free operation? Why or why not?
 
-Each employee can be regarded as a communicating sequential process. What form of interprocess communication do they use? Relate this model to processes in UNIX.
-
-Five jobs are waiting to be run. Their expected run times are 9, 6, 3, 5, and x. In what order should they be run to minimize average response time? (Your answer will depend on x).
-
-The aging algorithm with a = 1/2 is being used to predict run times. The previous four runs, from oldest to most recent, are 40, 20, 40, and 15 msec. What is the prediction of the next time? Explain.
-
-In the dining philosophers problem, let the following protocol be used: An even-numbered philosopher always picks up his left fork before picking up his right fork; an odd-numbered philosopher always picks up his right fork before picking up his left fork. Will this protocol guarantee deadlock-free operation? Why or why not?
-
-The readers and writers problem can be formulated in several ways with regard to which category of processes can be started when. Carefully describe three different variations of the problem, each one favoring (or not favoring) some category of processes. For each variation, specify what happens when a reader or a writer becomes ready to access the database, and what happens when a process is finished.
+10. The readers and writers problem can be formulated in several ways with regard to which category of processes can be started when. Carefully describe three different variations of the problem, each one favoring (or not favoring) some category of processes. For each variation, specify what happens when a reader or a writer becomes ready to access the database, and what happens when a process is finished.
